@@ -4960,7 +4960,11 @@ Molpy.DefineBoosts = function() {
 			&& Molpy.Got('LogiPuzzle')) {
 			if (Molpy.Has('LogiPuzzle', Molpy.PokeBar()))
 			{
-				if (Molpy.IsEnabled('Shadow Feeder') && Molpy.Has('LogiPuzzle', 100) && Molpy.Got('ShadwDrgn') && Molpy.Spend('Bonemeal', 5)) {
+				var tens = Math.floor((Molpy.Level('LogiPuzzle') - 1) / 10) * 10;
+				var cost = (100 + Molpy.LogiMult(25)) * tens;
+				if (Molpy.IsEnabled('Zoofeeder') && Molpy.Has('GlassBlocks', cost) && !Molpy.PuzzleGens.caged.active) {
+					Molpy.MakeCagedPuzzle(cost, tens);
+				} else if (Molpy.IsEnabled('Shadow Feeder') && Molpy.Has('LogiPuzzle', 100) && Molpy.Got('ShadwDrgn') && Molpy.Spend('Bonemeal', 5)) {
 					Molpy.ShadowStrike(1);
 				}
 			}
@@ -8449,6 +8453,32 @@ Molpy.DefineBoosts = function() {
 
 		price: {
 			Bonemeal: 10000
+		}
+	});
+	new Molpy.Boost({
+		name: 'Zoofeeder',
+		icon: 'zookeeper',
+		group: 'bean',
+		className: 'toggle',
+
+		desc: function(me) {
+			var str = 'Free a locked logicat when zookeeper runs out. ';
+			if(me.bought) {
+				str += '<br><input type="Button" onclick="Molpy.GenericToggle(' + me.id + ')" value="' + (me.IsEnabled ? 'Dea' : 'A') + 'ctivate"></input>';
+			}
+			return str;
+		},
+		
+		IsEnabled: Molpy.BoostFuncs.BoolPowEnabled,
+		
+		buyFunction: function() {
+			this.IsEnabled = 1;
+		},
+		
+		price:{
+			Sand: Infinity,
+			Castles: Infinity,
+			GlassBlocks: '2.5G',
 		}
 	});
 	// END OF BOOSTS, add new ones immediately before this comment
