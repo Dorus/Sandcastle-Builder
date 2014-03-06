@@ -26,6 +26,55 @@ For personal amusement only.
 
 ## Changelog
 
+### 3.33331
+
+#### Waveney
+- Fixed error on load for Index and Pure 
+- Fixed Panther Rush upgrades to levels 1 and 2
+- More Coloured options for decimal numbers
+- Stop rifting to Minus until you have chips
+- Better Stuff Sorting
+- Molpy Down and Coma got lost on Clasic
+- Fast Forward bug fix
+
+### 3.3333
+
+#### Waveney
+- Refactored the options handling and grouped related options
+- Fixed Chateau Bug
+- More options for making the decimal parts of numbers clearer
+- Option to choose the logicat colour scheme
+- Discoveries as Faves work if/when badges are added
+- Finally found why logicat needed negative points to go up
+- Fireproof now reduces current Jamming
+- Lodestone Boost
+- Larger upgrades to Panther Rush
+
+#### LucidCrux
+- Kite and Key and Lightning in a Bottle can now unlock when 'lightning strikes twice'.
+- Bonus for 'lightning strikes twice' now properly includes the Thunderbird bonus and
+  has been set to a consistent 10% bonus on top of everything else instead.
+- The double strike bonus is capped at 50k without Thunderbird and Temporal Duplication
+- Fix rift image flickering
+- Fix targeted time travel with mustard castles
+- Fix infinite tools producing mustard
+- Mustard tools show Mustard per click
+
+#### Bakasan15
+- Less intrusive log autoscroll
+- Current log button
+- Colours in log entries
+
+#### mart0258
+- TDE fixes, particularly the 0x multiplier
+
+#### ED
+- Started fixing log for classic
+- Did some testing
+- Refresh boost/badge on class (tag) change, to update faves
+- Shadow Feeder only activates a limited number of times per NP (increase with Panther Rush or CDSP) (maybe still too high)
+- Vaults can now give flux crystals under the right circumstances!
+
 ### 3.3332
 
 #### Waveney
@@ -33,12 +82,31 @@ For personal amusement only.
 - Fixed bugs on Panther Rush and logicats
 - Panther Rush Badges
 - Option for decimal parts of numbers to be smaller
+- Small performance improvement
+- Logicats work in Faves and non faves at the same time
 
 #### ED:
 - Prevent Glass Ceiling 10 and 11 from being awarded by Logicat until you have Ceiling Broken
+- Alias for Chateau
+- Fix notification crash when earning badge with description as a function
+- Found an oooooold missing linebreak in descripton of cost of buying Sand Refinery
+
+#### LucidCrux
+- Rift Fade
+- Boost save/load changes
+- Glass Ceiling price fix
+- More major refactor work (lots and lots of changes and fixes)
+
+#### eqbot
+- Fix clicking not turning sand into castles
+- Some sand/castles changes using LucidCrux's changes
 
 #### mart0258:
 - Date stamp notifications
+- Fix blast furnace spam
+
+#### Bakasan15:
+- Log split up by ONG (use Back/Forward buttons. With autoscroll enabled, it'll automatically move forward when an ONG happens
 
 ### 3.3331
 

@@ -156,9 +156,8 @@
 			Molpy.UpdateColourScheme();
 			return;
 		}
-		Molpy.ClearLog();
-
 		Molpy.GamenumsFromString(localStorage['Gamenums'], version);
+		Molpy.ClearLog();
 		Molpy.SandToolsFromString(localStorage['SandTools']);
 		Molpy.CastleToolsFromString(localStorage['CastleTools'], version);
 		Molpy.BoostsFromString(localStorage['Boosts'], version);
@@ -266,7 +265,7 @@
 			return;
 		}
 		if(thread == 'typo') {
-			Molpy.options.typo = 1 * !Molpy.options.typo;
+			Molpy.Setoption('typo',1 * !Molpy.options.typo);
 			return;
 		}
 		if(thread == 'F5') {
@@ -293,16 +292,6 @@
 			_gaq && _gaq.push(['_trackEvent', 'Import', 'Complete']);
 			Molpy.Save();
 		}
-	}
-
-	Molpy.OptionsToString = function() {
-		var str = '' + (Molpy.options.particles ? '1' : '0') + (Molpy.options.numbers ? '1' : '0')
-			+ (Molpy.options.autosave) + (Molpy.options.autoupdate ? '1' : '0') + (Molpy.options.sea ? '1' : '0')
-			+ (Molpy.options.colpix ? '1' : '0') + (Molpy.options.longpostfix ? '1' : '0')
-			+ (Molpy.options.colourscheme) + (Molpy.options.sandmultibuy) + (Molpy.options.castlemultibuy)
-			+ (Molpy.options.fade) + (Molpy.options.typo) + (Molpy.options.science) + (Molpy.options.autosavelayouts)
-			+ (Molpy.options.autoscroll) + (Molpy.options.boostsort) + (Molpy.options.european) + (Molpy.options.smalldecimal);
-		return str;
 	}
 
 	Molpy.GamenumsToString = function() {
@@ -422,28 +411,6 @@
 
 		threads.push(thread);
 		return threads;
-	}
-
-	Molpy.OptionsFromString = function(thread) {
-		var pixels = thread.split('');
-		Molpy.options.particles = parseInt(pixels[0]) || 0;
-		Molpy.options.numbers = parseInt(pixels[1]) || 0;
-		Molpy.options.autosave = parseInt(pixels[2]) || 0;
-		Molpy.options.autoupdate = parseInt(pixels[3]) || 0;
-		Molpy.options.sea = parseInt(pixels[4]) || 0;
-		Molpy.options.colpix = parseInt(pixels[5]) || 0;
-		Molpy.options.longpostfix = parseInt(pixels[6]) || 0;
-		Molpy.options.colourscheme = parseInt(pixels[7]) || 0;
-		Molpy.options.sandmultibuy = (parseInt(pixels[8])) || 0;
-		Molpy.options.castlemultibuy = (parseInt(pixels[9])) || 0;
-		Molpy.options.fade = (parseInt(pixels[10])) || 0;
-		Molpy.options.typo = (parseInt(pixels[11])) || 0;
-		Molpy.options.science = (parseInt(pixels[12])) || 0;
-		Molpy.options.autosavelayouts = parseInt(pixels[13]) || 0;
-		Molpy.options.autoscroll = parseInt(pixels[14]) || 0;
-		Molpy.options.boostsort = parseInt(pixels[15]) || 0;
-		Molpy.options.european = parseInt(pixels[16]) || 0;
-		Molpy.options.smalldecimal = parseInt(pixels[17]) || 0;
 	}
 
 	Molpy.GamenumsFromString = function(thread, version) {
@@ -952,6 +919,12 @@
 				Molpy.BoostsOwned++;
 			}
 		}
+		if(version < 3.3333) {
+			Molpy.Boosts['Sand'].countdown = 0;
+			Molpy.Boosts['Castles'].countdown = 0;
+			Molpy.Boosts['Time Travel'].countdown = 0;
+			Molpy.Boosts['GlassBlocks'].countdown = 0;
+		}
 	}
 
 	Molpy.MakePrizeList = function() {
@@ -1034,11 +1007,7 @@
 			Molpy.startDate = parseInt(new Date().getTime());
 			Molpy.newpixNumber = 1;
 			Molpy.ONGstart = ONGsnip(new Date());
-			Molpy.options.sandmultibuy = 0;
-			Molpy.options.castlemultibuy = 0;
-			Molpy.options.boostsort = 0;
-			Molpy.options.european = 0;
-			Molpy.options.smalldecimal = 0;
+			Molpy.DefaultOptions();
 
 			var keep = '';
 			if(!coma && Molpy.Got('No Need to be Neat')) {
@@ -1137,10 +1106,10 @@
 			&& confirm('Seriously, this will reset ALL the things.\nAre you ABSOLUTELY sure?')) {
 			//reset the badges
 			_gaq.push(['_trackEvent', 'Coma', 'Begin', '' + Molpy.newpixNumber]);
-			Molpy.options.fade = 0;
 			Molpy.Down(1);
 			Molpy.saveCount = 0;
 			Molpy.loadCount = 0;
+			Molpy.DefaultOptions();
 			var highest = Molpy.highestNPvisited;
 			Molpy.highestNPvisited = 0;
 			Molpy.BadgesOwned = 0;
